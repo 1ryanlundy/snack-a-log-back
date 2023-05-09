@@ -6,6 +6,7 @@ CREATE DATABASE meals_dev;
 CREATE TABLE meals (
  id SERIAL PRIMARY KEY,
  name TEXT NOT NULL,
+ serving_size NUMERIC NOT NULL,
  image TEXT NOT NULL,
  calories NUMERIC NOT NULL,
  protein NUMERIC NOT NULL,
