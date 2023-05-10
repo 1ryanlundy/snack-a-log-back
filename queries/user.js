@@ -49,9 +49,20 @@ const updateUser = async (id, user) => {
     }
 }
 
+// delete user
+const deleteUser = async (id) => {
+    try {
+        const deletedUser = await db.one('DELETE FROM users WHERE id=$1 RETURNING *', id);
+        return { deletedUser }
+    } catch (error) {
+        return { error: error };
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUser,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
