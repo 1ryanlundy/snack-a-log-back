@@ -39,7 +39,6 @@ const createMeal = async (meal) => {
 
 // update
 const updateMeal = async (id, meal) => {
-    console.log("meal:", meal);
     try {
         const updatedMeal = await db.one(
             `UPDATE meals SET name=$1, serving_size=$2, image=$3, calories=$4, protein=$5, fiber=$6, sugar=$7, carbs=$8 WHERE id=$9 RETURNING *`,
