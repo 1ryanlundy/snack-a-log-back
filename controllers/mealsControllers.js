@@ -34,22 +34,29 @@ meals.get("/:id", async (req, res) => {
 
 // create
 meals.post("/", validateMeal, async (req, res) => {
-    const { error, result } = await createMeal(req.body);
-    if (error) {
-        res.status(500).json({ error: "Server Error" });
-    } else {
-        res.status(201).json(result);
+    const { newMeal } = await createMeal(req.body);
+
+    try {
+        res.status(201).json(newMeal);
+    } catch (error) {
+        res.status(500).json({ error: error })
     }
 });
 
 // update
 meals.put("/:id", validateMeal, async (req, res) => {
     const { id } = req.params;
-    const { error, updatedMeal } = await updateMeal(id, req.body);
-    if (error) {
-        res.status(500).json({ error: "Server Error" });
-    } else {
+    // const { error, updatedMeal } = await updateMeal(id, req.body);
+    // if (error) {
+    //     res.status(500).json({ error: "Server Error" });
+    // } else {
+    //     res.status(200).json(updatedMeal);
+    // }
+    const { updatedMeal } = await updateMeal(id, req.body);
+    try {
         res.status(200).json(updatedMeal);
+    } catch (error) {
+        res.status(500).json({ error: "Server Error" });
     }
 });
 
