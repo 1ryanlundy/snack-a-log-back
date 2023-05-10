@@ -4,7 +4,9 @@ const validateUser = require("../validations/validateUser");
 const {
     getAllUsers,
     getUser,
-    createUser
+    createUser,
+    updateUser,
+    deleteUser
 } = require("../queries/user");
 
 // index user
@@ -13,7 +15,7 @@ user.get("/", async (req, res) => {
     if (error) {
         res.status(500).json({ error: error })
     } else {
-        res.status(200).json({ allUsers });
+        res.status(200).json(allUsers);
     }
 })
 
@@ -40,6 +42,28 @@ user.post("/", validateUser, async (req, res) => {
     } else {
         res.status(201).json(newUser);
     }
-})
+});
+
+// update user
+user.put("/:id", validateUser, async (req, res) => {
+    const { id } = req.params;
+    const { error, updatedUser } = await updateUser(id, req.body);
+    if (error) {
+        res.status(500).json({ error: "Server Error" });
+    } else {
+        res.status(200).json(updatedUser)
+    }
+});
+
+// delete user
+user.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { error, deletedUser } = await deleteUser(id);
+    if (error) {
+        res.status(404).json("User Not Found");
+    } else {
+        res.status(201).json(deletedUser);
+    }
+});
 
 module.exports = user;

@@ -39,7 +39,6 @@ const createMeal = async (meal) => {
 
 // update
 const updateMeal = async (id, meal) => {
-    console.log("meal:", meal);
     try {
         const updatedMeal = await db.one(
             `UPDATE meals SET name=$1, serving_size=$2, image=$3, calories=$4, protein=$5, fiber=$6, sugar=$7, carbs=$8 WHERE id=$9 RETURNING *`,
@@ -55,7 +54,6 @@ const updateMeal = async (id, meal) => {
 const deleteMeal = async (id) => {
     try {
         const deletedMeal = await db.one('DELETE FROM meals WHERE id=$1 RETURNING *', id);
-        console.log('deletedMeal', deletedMeal)
         return { deletedMeal };
     } catch (error) {
         return { error: error }
