@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mealsControllers = require("./controllers/mealsControllers");
 
+
 // config
 const app = express();
 
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/meals", mealsControllers);
+
+// app.use("/user", userController);
 
 app.get("*", (req, res) => {
     res.status(404).send("Page Not Found");
