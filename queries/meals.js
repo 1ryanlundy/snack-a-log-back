@@ -4,10 +4,8 @@ const db = require("../db/dbConfig");
 const getAllMeals = async () => {
     try {
         const result = await db.any("SELECT * FROM meals");
-        console.log('This is working')
         return { result };
     } catch (error) {
-        console.log('This isnt working')
         return { error };
     }
 };
@@ -27,13 +25,13 @@ const createMeal = async (meal) => {
     try {
         const newMeal = await db.one(
             `INSERT INTO
-            meals(name, image, calories, protein, fiber, sugar, carbs)
+            meals(name, serving_size, image, calories, protein, fiber, sugar, carbs)
             VALUES
-             ($1, $2, $3, $4, $5, $6, $7)
+             ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *; `,
-            [meal.name, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs]
+            [meal.name, meal.serving_size, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs]
         );
-        return newMeal;
+        return { newMeal };
     } catch (error) {
         return { error: error }
     }
@@ -41,9 +39,10 @@ const createMeal = async (meal) => {
 
 // update
 const updateMeal = async (id, meal) => {
+    console.log("meal:", meal);
     try {
         const updatedMeal = await db.one(
-            `UPDATE meals SET name=$1, serving_size=$2 image=$3, calories=$4, protein=$5, fiber=$6, sugar=$7, carbs=$8 WHERE id=$9 RETURNING *`,
+            `UPDATE meals SET name=$1, serving_size=$2, image=$3, calories=$4, protein=$5, fiber=$6, sugar=$7, carbs=$8 WHERE id=$9 RETURNING *`,
             [meal.name, meal.serving_size, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs, id]
         );
         return { updatedMeal };
