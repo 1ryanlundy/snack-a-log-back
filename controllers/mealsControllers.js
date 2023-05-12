@@ -45,14 +45,6 @@ meals.post("/", validateMeal, async (req, res) => {
 
 // update
 meals.put("/:id", validateMeal, async (req, res) => {
-    // const { id } = req.params;
-
-    // const { updatedMeal } = await updateMeal(id, req.body);
-    // try {
-    //     res.status(200).json(updatedMeal);
-    // } catch (error) {
-    //     res.status(500).json({ error: "Server Error" });
-    // }
     const { id } = req.params;
     const { error, updatedMeal } = await updateMeal(id, req.body);
     if (error) {
