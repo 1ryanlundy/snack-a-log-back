@@ -25,11 +25,11 @@ const createMeal = async (meal) => {
     try {
         const newMeal = await db.one(
             `INSERT INTO
-            meals(name, serving_size, serving_size_unit, image, calories, protein, fiber, sugar, carbs, total_fat)
+            meals(name, image, serving_size, serving_size_unit, calories, protein, fiber, sugar, carbs, total_fat, user_id, meal_type)
             VALUES
-             ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-            RETURNING *; `,
-            [meal.name, meal.serving_size, meal.serving_size_unit, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs, meal.total_fat]
+             ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+            RETURNING * `,
+            [meal.name, meal.image, meal.serving_size, meal.serving_size_unit, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs, meal.total_fat, meal.user_id, meal.meal_type]
         );
         return { newMeal };
     } catch (error) {
@@ -41,8 +41,8 @@ const createMeal = async (meal) => {
 const updateMeal = async (id, meal) => {
     try {
         const updatedMeal = await db.one(
-            `UPDATE meals SET name=$1, serving_size=$2, serving_size_unit=$3, image=$4, calories=$5, protein=$6, fiber=$7, sugar=$8, carbs=$9, total_fat=$10 WHERE id=$11 RETURNING *`,
-            [meal.name, meal.serving_size, meal.serving_size_unit, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs, meal.total_fat, id]
+            `UPDATE meals SET name=$1, serving_size=$2, serving_size_unit=$3, image=$4, calories=$5, protein=$6, fiber=$7, sugar=$8, carbs=$9, total_fat=$10, user_id=$11, meal_type=$12 WHERE id=$13 RETURNING *`,
+            [meal.name, meal.serving_size, meal.serving_size_unit, meal.image, meal.calories, meal.protein, meal.fiber, meal.sugar, meal.carbs, meal.total_fat, meal.user_id, meal.meal_type, id]
         );
         return { updatedMeal };
     } catch (error) {
