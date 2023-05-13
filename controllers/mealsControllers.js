@@ -35,7 +35,6 @@ meals.get("/:id", async (req, res) => {
 // create
 meals.post("/", validateMeal, async (req, res) => {
     const { newMeal } = await createMeal(req.body);
-
     try {
         res.status(201).json(newMeal);
     } catch (error) {
