@@ -24,11 +24,11 @@ const createUser = async (user) => {
     try {
         const newUser = await db.one(
             `INSERT INTO 
-             users (name, weight_goal, calorie_goal)
+             users (name, current_weight, weight_goal, calorie_goal)
             VALUES
-             ($1, $2, $3)
+             ($1, $2, $3, $4)
             RETURNING *; `,
-            [user.name, user.weight_goal, user.calorie_goal]
+            [user.name, user.current_weight, user.weight_goal, user.calorie_goal]
         );
         return { newUser }
     } catch (error) {
@@ -40,8 +40,8 @@ const createUser = async (user) => {
 const updateUser = async (id, user) => {
     try {
         const updatedUser = await db.one(
-            `UPDATE users SET name=$1, weight_goal=$2, calorie_goal=$3 WHERE id=$4 RETURNING *`,
-            [user.name, user.weight_goal, user.calorie_goal, id]
+            `UPDATE users SET name=$1, current_weight=$2, weight_goal=$3, calorie_goal=$4 WHERE id=$5 RETURNING *`,
+            [user.name, user.current_weight, user.weight_goal, user.calorie_goal, id]
         );
         return { updatedUser };
     } catch (error) {
