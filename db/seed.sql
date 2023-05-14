@@ -1,8 +1,8 @@
 \c meals_dev;
 
-INSERT INTO users (name, weight_goal, calorie_goal) VALUES
- ('Ryan L', 170, 2500),
- ('Diandre M', 15, 1700);
+INSERT INTO users (name,  current_weight, weight_goal, calorie_goal) VALUES
+ ('Ryan L',157, 170, 2500),
+ ('Diandre M',150, 150, 1700);
 
 INSERT INTO meals (name, image, serving_size, serving_size_unit, calories, total_fat, carbs, fiber, sugar, protein, user_id, meal_type) VALUES
  ('Turkey Sandwich', 'https://www.valyastasteofhome.com/wp-content/uploads/2022/01/Turkey-Sandwich-Recipe.jpg', 1, 'sandwich', 324, 13, 29, 2, 3.8, 21, 1, 'lunch'),

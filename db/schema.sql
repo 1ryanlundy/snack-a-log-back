@@ -6,6 +6,7 @@ CREATE DATABASE meals_dev;
 CREATE TABLE users (
  id SERIAL PRIMARY KEY,
  name TEXT NOT NULL,
+ current_weight INTEGER NOT NULL,
  weight_goal INTEGER NOT NULL,
  calorie_goal INTEGER NOT NULL
 );
