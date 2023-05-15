@@ -14,6 +14,7 @@ const {
 
 users.use("/:userId/meals", userMealsControllers);
 
+
 // index users
 users.get("/", async (req, res) => {
     const { error, allUsers } = await getAllUsers();
