@@ -5,11 +5,11 @@ const { getUserMeals } = require("../queries/userMeals");
 // show
 userMeals.get("/", async (req, res) => {
     const { userId } = req.params;
-    const { error, userMeals } = await getUserMeals(userId);
+    const { error, userMealsData } = await getUserMeals(userId);
     if (error) {
         res.status(500).json({ error: error });
     } else {
-        res.status(200).json(userMeals);
+        res.status(200).json(userMealsData);
     }
 });
 
