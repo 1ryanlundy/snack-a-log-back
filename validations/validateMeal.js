@@ -12,7 +12,7 @@ const mealSchema = Joi.object({
     fiber: Joi.number().required(),
     sugar: Joi.number().required(),
     protein: Joi.number().required(),
-    user_id: Joi.number().required(),
+    user_id: Joi.number().optional(),
     meal_type: Joi.string().required()
 });
 
